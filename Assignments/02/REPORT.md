@@ -15,6 +15,9 @@ Running program versions on the smaller Test dataset...
 | 05 - threaded + -O3 compiler flag | 3.39s user 0.02s system 684% cpu 0.498 total   | 122.18x | v02 compiled with flag -O3                 |
 | 06 - dynamic + -O3 compiler flag  | 3.69s user 0.02s system 711% cpu 0.522 total   | 116.57x | v03 compiled with flag -O3                 |
 
+## Conclusion 1
+* It seems that on the smaller data set, the basic threading with the .detach() function performs the best. Perhaps this is due to less overhead and locking/unlocking.
+  
 Final dataset...
 |              Version              | Time                                           | Changes                                    |
 |:---------------------------------:|------------------------------------------------|--------------------------------------------|
@@ -24,11 +27,12 @@ Final dataset...
 | 07 - dynamic + -O3 compiler flag  | 830.47s user 5.09s system 678% cpu 2:03.19 total | v04 compiled with flag -O3               |
 
 
-## Conclusion
-* It seems that on the smaller data set, the basic threading with the .detach() function performs the best. Perhaps this is due to less overhead and locking/unlocking.
-* On the larger dataset, the dynamic scheduling version runs the fastest!
+## Conclusion 2
 
-## i. Intuition
+* On the larger dataset, the dynamic scheduling version runs the fastest!
+* I think maybe because I'm using a vector to store chunks of 4 after the datafile is unlocked... I'm actually adding data padding which would negate the benefit of grouped fetching. I would have to form a hypothesis on how the data is shaped to proceed with this strategy.
+
+## i. Problem Solving Intuition
 1. Break the code into parts so I understand what's moving
 2. Find the for-loop that is going over the indexed set of LychrelData
 3. Review provided classes - they look already good to go and designed for parallelism and speed, even says thread safety is ready in LychrelData.h
@@ -41,5 +45,6 @@ Final dataset...
 10. Implement dynamic scheduling with grouping to improve data-locality(caching) and reduce mutex locking/unlocking overhead
 
 ## ii. Insight
-Maybe having separate threads to handle different parts of the program might add some benefit...
-We be able to create some maximum iteration count where we can postpone operation on complex number patterns until the last cycle and thread the remaining sums/palindrome checking?
+* Maybe having separate threads to handle different parts of the program might add some benefit...
+* We be able to create some maximum iteration count where we can postpone operation on complex number patterns until the last cycle and thread the remaining sums/palindrome checking?
+*  I didn't give myself enough time to thoroughly finish all parts of the project
