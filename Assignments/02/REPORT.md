@@ -3,7 +3,7 @@
 ## Improvement Iterations
 
 Apparently the -O3 compiler instruction was supposed to be included in the makefile... so I missed that part.
-I ran a trial of the data source from Final and it took around 43 minutes before I gave up on it - unfortunately I did not have time to complete the entirety of the project using the Final data, but I did analyze my fastest programs on it.
+As discussed in class, running the initial trial on Final was hard for me to sit through to finish.
 
 Running program versions on the smaller Test dataset...
 
