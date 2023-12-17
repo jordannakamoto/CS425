@@ -9,5 +9,5 @@ I do wish I had time to try implementing the ring buffer.
 
 | Version | Time  | Speedup | Changes                                     |
 | :-----: | ----  | :-----: | ------------------------------------------ |
-|  base   | 6.1s  | &mdash; | Initial version - no changes               |
-|   02    | 2.4s  | 2.54x   | Compiled with -Ofast and added threading |
+|  base   | 6.1m  | &mdash; | Initial version - no changes               |
+|   02    | 2.4m  | 2.54x   | Compiled with -Ofast and added threading |
